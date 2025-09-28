@@ -66,6 +66,13 @@ const CentralDialog: React.FC = () => {
           onChange={(e) => setInput(e.target.value)}
           placeholder="请输入内容…"
           disabled={loading}
+          // 添加键盘事件监听，按回车发送消息
+          onKeyDown={(e) => {
+            if (e.key === "Enter" && !loading) {
+              e.preventDefault(); // 阻止默认行为
+              handleSend(); // 调用发送消息函数
+            }
+          }}
         />
         <button onClick={handleSend} disabled={loading || !input.trim()}>
           发送
